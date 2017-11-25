@@ -1,5 +1,5 @@
 # Zoo System (Not compleated)
-Contains only <b>source</b> folder.
+Contains only <b><i>source</i></b> folder.
 ### ToDo:
-* compleate Zoo System According to given tasks
+* compleate Zoo System according to given tasks
 * complete readme file :)
