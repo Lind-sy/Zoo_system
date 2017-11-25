@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Ticket {
 
 	public String type;
@@ -9,12 +7,14 @@ public class Ticket {
 	public String voucher;
 
 	
-	public Ticket(double price, String date,String type,int discount,String voucher) {
-		this.price = price;
-		this.date = date;
-		this.type = type;
-		this.discount = discount;
-		this.voucher = voucher;
+	public Ticket Ticket(double price, String date, String type, int discount, String voucher) {
+		Ticket ticket = new Ticket();
+		ticket.price = price;
+		ticket.date = date;
+		ticket.type = type;
+		ticket.discount = discount;
+		ticket.voucher = voucher;
+		return ticket;
 	}
 	
 	// bulder pattern
