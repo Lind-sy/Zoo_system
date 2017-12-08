@@ -7,7 +7,7 @@ Create a system where Incoming visitors to the zoo are handled, tickets are sold
 
 <i>(only one of above)</i>
 ### In next Lecture (22.dec.2017):
-#####Web service
+Web service
 For web service we will work also with the additional requests:
 * We need statistics for sold tickets
 * We need gift shop items for visitors
