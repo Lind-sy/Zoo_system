@@ -1,4 +1,8 @@
 package zoo;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * @author Martins Buhanovskis
@@ -11,89 +15,83 @@ package zoo;
  *
  */
 public class Visitor{
-	
-	private String name ="";
-	private boolean ticketStatuss;
-	Ticket ticket = new Ticket();
-	
-	
-	public Visitor() {	
-	}
-	
-	public Visitor(String name, boolean ticketStatuss) {
-		//this.name = name;
-		//this.ticketStatuss = ticketStatuss;
-		setName(name);
-		setHaveTicket(ticketStatuss);
-		
-	}
+
+	private String name;
+	private static List<Ticket> ticketList = new ArrayList<>();
+	private static HumanCatorgorys catergory = new HumanCatorgorys();
+	private static List<Voucher> voucherList = new ArrayList<>();
+
+	public Visitor(String name, String category){
+		this.name = name;
+		setCatergory(category);
+	};
+
+	public Visitor(String name){
+		this.name = name;
+	};
+
 	public String getName() {
 		return name;
 	}
-	public boolean getTicketStatus() {
-		return ticketStatuss;
-	}
-	 
-	public void setName(String inputName) {
-		this.name = inputName;
-	}
-	public void setHaveTicket(boolean ticketStatus) {
-		this.ticketStatuss = ticketStatus;
-	}
-	
-	/**
-	 * gives or gets new ticket with parameters as follows:
-	 * 
-	 * @param price
-	 * @param date
-	 * @param type
-	 * @param discount
-	 * @param humanStatus
-	 * @param code
-	 */
-	public void zooTicket(double price, String date,String type,String discount,String humanStatus,String code)  {
-		if(this.ticketStatuss == true) {
-			//Shop shop = new Shop();
-		
-			//ticket.addTicket(type, date, price, discount, code, humanStatus);
-			//addTicket(ticket.type, date, price, discount, code, humanStatus);
-			//shop.giveTicket(type, date, price, discount, code, humanStatus);
-			giveTicket(type, date, price, discount, code, humanStatus);
 
-		} else {
-			getTicket(price, date, type, discount, humanStatus, code);
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Ticket> getTicketList() {
+		return ticketList;
+	}
+
+	public String getCatergory() {
+		return catergory.getCategory();
+	}
+
+	public void setCatergory(String catergory) {
+			this.catergory.setCategory(catergory);
+	}
+
+	public List<Voucher> getVoucherList() {
+		return voucherList;
+	}
+
+	/**
+	 * Method that finds user voucher based on Voucher code
+	 * @param code - Voucher code
+	 * @return Voucher
+	 */
+	public Voucher findVoucher(String code){
+		for (Voucher v: voucherList) {
+			if(v.getCode().equals(code)){
+				return v;
+			}else{
+				throw new IllegalArgumentException("You don't have this voucher");
+			}
+		}
+		return new Voucher();
+	}
+
+	public void addVoucher(Voucher voucher){
+		voucherList.add(voucher);
+	}
+
+	/**
+	 * Method that returns users voucher code
+	 * @param index - voucher index in user voucher list
+	 * @return code of voucher
+	 */
+	public String getVoucherCode(int index){
+		if(voucherList.size()>=index) {
+			return voucherList.get(index-1).getCode();
+		}else{
+			throw new IndexOutOfBoundsException("You don't have so much vouchers!");
 		}
 	}
-	
-	
+
 	/**
-	 * Gets new ticket from shop
-	 * 
-	 * @param price
-	 * @param date
-	 * @param type
-	 * @param discount
-	 * @param humanStatus
-	 * @param code
+	 * Method that adds ticket to user ticket list
+	 * @param ticket
 	 */
-	public void getTicket(double price, String date,String type,String discount,String humanStatus,String code) {
-		Shop sh = new Shop();
-		sh.buyTicket(price,date,type,discount,humanStatus,code,ticketStatuss);
+	public void addTicket(Ticket ticket) {
+		ticketList.add(ticket);
 	}
-/**
- * Gives ticket and adds to ticket list
- * 
- * @param type
- * @param date
- * @param price
- * @param discount
- * @param code
- * @param humanStatus
- */
-    public void giveTicket(String type,String date,double price,String discount,String code,String humanStatus) {
-        //Ticket ticket = new Ticket(type, date, price, discount, code, humanStatus);
-        //ticket.addTicket(ticket);
-    	Ticket ticket = new Ticket(type, date, price, discount, code, humanStatus);
- 	    this.ticket.addTicket(ticket);
-    }
 }
